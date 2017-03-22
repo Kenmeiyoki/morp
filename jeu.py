@@ -4,7 +4,7 @@ from __future__ import print_function
 import os
 import time
 
-Start = 5
+Start = 60
 Tableau = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 ArrowR = [" ", " ", " "]
 Tour = 2
@@ -13,11 +13,11 @@ col = 0
 lin = 0
 Signe = " "
 
-for i in range(5):
+for i in range(60):
 	os.system("clear")
-	print("Le jeu commence dans ", Start, " sec!")
+	print("Le jeu commence dans ", Start, " !")
 	Start = Start-1
-	time.sleep(0.1)
+	time.sleep(0.01)
 def dis_tab(numcol):
 	print("")
 	print("Au tour du joueur: ", Tour)
@@ -63,7 +63,7 @@ def err_col_2(col):
 
 def err_col_1(col):
 	os.system("clear") 
-	print("ERREUR : Cononne inconnue")
+	print("ERREUR : Colonne inconnue")
 	time.sleep(1)
 	os.system("clear")
 	print("")
@@ -82,7 +82,7 @@ def display(row, col):
 		Tableau[indice] = Signe
 	else:
 		os.system("clear")
-		print("ERREUR : Un signe à déjà été définis ici !")
+		print("ERREUR : Un signe a déjà été défini ici !")
 		time.sleep(1)
 		print("Veuillez réessayer une autre case")
 		time.sleep(2)
@@ -105,6 +105,7 @@ time.sleep(0.1)
 dis_tab(col)
 # if(tour1 == 1):
 while(Gagner != 1 or Gagner != 2):
+	ArrowR = [" ", " ", " "]
 	if(Tour == 1):
 		Tour = 2
 		Signe = "O"
@@ -126,9 +127,58 @@ while(Gagner != 1 or Gagner != 2):
 	if(lin != 1 and lin != 2 and lin != 3):
 		err_lin_1(lin)
 	display(lin, col)
-	print("salut")
-	
-	if Tableau[0] == Tableau[1] == Tableau[2]:
+	# print("salut")
+#	time.sleep(5)
+	if(Tableau[0] == Tableau[1] == Tableau[2]):
+		if Tableau[0] != " " and Tableau[1] != " " and Tableau[2] != " ":
+			os.system("clear")
+			print("Le joueur", Tour, "a gagné")
+			break
+	if(Tableau[3] == Tableau[4] == Tableau[5]):
+		if Tableau[3] != " " and Tableau[4] != " " and Tableau[5] != " ":
+			os.system("clear")
+			print("Le joueur", Tour, "a gagné")
+			break
+	if(Tableau[6] == Tableau[7] == Tableau[8]):
+		if Tableau[6] != " " and Tableau[7] != " " and Tableau[8] != " ":
+			os.system("clear")
+			print("Le joueur", Tour, "a gagné")
+			break
+	if(Tableau[0] == Tableau[3] == Tableau[6]):
+		if Tableau[0] != " " and Tableau[3] != " " and Tableau[6] != " ":
+			os.system("clear")
+			print("Le joueur", Tour, "a gagné")
+			break
+	if(Tableau[1] == Tableau[4] == Tableau[7]):
+		if Tableau[1] != " " and Tableau[4] != " " and Tableau[7] != " ":
+			os.system("clear")
+			print("Le joueur", Tour, "a gagné")
+			break
+	if(Tableau[2] == Tableau[5] == Tableau[8]):
+		if Tableau[2] != " " and Tableau[5] != " " and Tableau[8] != " ":
+			os.system("clear")
+			print("Le joueur", Tour, "a gagné")
+			break
+	if(Tableau[0] == Tableau[4] == Tableau[8]):
+		if Tableau[0] != " " and Tableau[4] != " " and Tableau[8] != " ":
+			os.system("clear")
+			print("Le joueur", Tour, "a gagné")
+			break
+	if(Tableau[2] == Tableau[4] == Tableau[6]):
+		if Tableau[2] != " " and Tableau[4] != " " and Tableau[6] != " ":
+			os.system("clear")
+			print("Le joueur", Tour, "a gagné")
+			break
+	if Tableau[0] != " " and Tableau[1] != " " and Tableau[2] != " " and Tableau[3] != " " and Tableau[4] != " " and Tableau[5] != " " and Tableau[6] != " " and Tableau[7] != " " and Tableau[8] != " ":
 		os.system("clear")
-		print("Le joueur", Tour, "à gagner")
+		print("Vous avez perdu !")
+		time.sleep(1)
+		print("Fin de la partie !")
+		time.sleep(5)
 		break
+		os.system("python jeu.py")
+# 0 1 2
+# 3 4 5
+# 6 7 8
+
+	
