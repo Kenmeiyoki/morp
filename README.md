@@ -2,7 +2,7 @@
 
 --- FOR LINUX ---
 1. Allez dans le dossier où se trouve le fichier jeu_linux.py puis cliquer droit suite a cela cliquer sur ouvrir un terminal
-2. Pour terminer tapez la commande "python jeu_ubuntu.py"
+2. Pour terminer tapez la commande "python jeu_linux.py"
 
 --- FOR WINDOWS ---
 1. Allez dans le dossier où vous avez installé le fichier jeu_windows.py puis cliquer droit sur la bar de navigation pour ensuite cliquer sur Copier le lien en tant que texte.
