@@ -1,4 +1,4 @@
-# FOR WINDOWS
+# FOR WINDOWS ver2.0
 # -*- coding: UTF-8 -*-
 from __future__ import print_function
 
