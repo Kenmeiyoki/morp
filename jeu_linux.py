@@ -1,5 +1,12 @@
-# UBUNTU version
+# UBUNTU version v3.0
 # -*- coding: UTF-8 -*-
+
+
+#
+#
+#
+#
+
 from __future__ import print_function
 
 import os
@@ -14,11 +21,17 @@ col = 0
 lin = 0
 Signe = " "
 
+W_1_det = 0
+W_2_det = 0
+W_3_det = 0
+
+
+
 for i in range(60):
 	os.system("clear")
 	print("Le jeu commence dans ", Start, " !")
 	Start = Start-1
-	time.sleep(0.01)
+	time.sleep(0.02)
 def dis_tab(numcol):
 	print("")
 	print("Au tour du joueur: ", Tour)
@@ -37,19 +50,12 @@ def dis_tab(numcol):
 		ArrowR[2] = "←"
 
 	print(arrow)
-	time.sleep(0.02)
 	print("╔═╦═╦═╗")
-	time.sleep(0.02)
 	print("║", Tableau[0], "║", Tableau[1], "║", Tableau[2], "║", ArrowR[0], sep="")
-	time.sleep(0.02)
 	print("╠═╬═╬═╣")
-	time.sleep(0.02)
 	print("║", Tableau[3], "║", Tableau[4], "║", Tableau[5], "║", ArrowR[1],sep="")
-	time.sleep(0.02)
 	print("╠═╬═╬═╣")
-	time.sleep(0.02)
 	print("║", Tableau[6], "║", Tableau[7], "║", Tableau[8], "║", ArrowR[2],sep="")
-	time.sleep(0.02)
 	print("╚═╩═╩═╝")
 def err_col_2(col):
 	os.system("clear") 
@@ -58,21 +64,58 @@ def err_col_2(col):
 	print("")
 	dis_tab(col)
 	print("")
-	col=input("Entrez le numéro de la colonne : ")
-	if(col != 1 and col != 2 and col != 3):
-		err_col_1(col)
+	print("Please wait...")
+	time.sleep(0.3)
 
-def err_col_1(col):
-	os.system("clear") 
-	print("ERREUR : Colonne inconnue")
-	time.sleep(1)
+
+def ask_input(txt):
+	string = "0"
+	verif = False
+	veiovroj = "Entrer le numéro de la "+txt+" : "
+	vjkdjvjf = "ERREUR : Nombre de la "+txt+" est erroné, (nombre entré : "+string+") Veuillez réessayer"
 	os.system("clear")
 	print("")
-	dis_tab(col)
+	dis_tab(lin)
 	print("")
-	col=input("Entrez le numéro de la colonne : ")
-	if(col != 1 and col != 2 and col != 3):
-		err_col_1(col)
+	while string != '1' and string != '2' and string != '3':
+		time.sleep(0.1)
+		os.system("clear")
+		if(verif == True):
+			print("")
+			print(vjkdjvjf)
+		print("")
+		dis_tab(lin)
+		print("")
+		verif = True
+		string=raw_input(veiovroj)
+	return int(string)
+
+
+
+def win_detect(W_1_det, W_2_det, W_3_det):
+	if(Tableau[W_1_det] == Tableau[W_2_det] == Tableau[W_3_det]):
+		if Tableau[W_1_det] != " " and Tableau[W_2_det] != " " and Tableau[W_3_det] != " ":
+			os.system("clear")
+			print("Le joueur", Tour, "a gagné")
+			return True
+	return False
+
+
+
+
+
+#def err_col_1(col):
+#	os.system("clear") 
+#	print("ERREUR : Colonne inconnue")
+#	time.sleep(1)
+#	os.system("clear")
+#	print("")
+#	dis_tab(col)
+#	print("")
+#	col=raw_input("Entrez le numéro de la colonne : ")
+#	verif_string_int(col)
+#	if(col != 1 and col != 2 and col != 3):
+#	err_col_1(col)
 
 def ind(row, col):
 	return (row-1)*3+col-1
@@ -84,22 +127,28 @@ def display(row, col):
 	else:
 		os.system("clear")
 		print("ERREUR : Un signe a déjà été défini ici !")
-		time.sleep(1)
+		time.sleep(0.1)
 		print("Veuillez réessayer une autre case")
-		time.sleep(2)
-		err_col_2(col)
+		time.sleep(2) 
+		time.sleep(0.1)
+		print("")
+		dis_tab(col)
+		print("")
+		print("Please wait...")
+		time.sleep(0.3)
 
-def err_lin_1(lin):
-	os.system("clear") 
-	print("ERREUR : Ligne inconnue")
-	time.sleep(1)
-	os.system("clear")
-	print("")
-	dis_tab(lin)
-	print("")
-	lin=input("Entrez le numéro de la ligne : ")
-	if(lin != 1 and lin != 2 and lin != 3):
-		err_lin_1(col)
+#def err_lin_1(lin):
+#	os.system("clear") 
+#	print("ERREUR : Ligne inconnue")
+#	time.sleep(1)
+#	os.system("clear")
+#	print("")
+#	dis_tab(lin)
+#	print("")
+#	lin=raw_input("Entrez le numéro de la ligne : ")
+#	verif_string_int(lin)
+#	if(lin != 1 and lin != 2 and lin != 3):
+#		err_lin_1(col)
 time.sleep(1)
 os.system("clear") 
 time.sleep(0.1)
@@ -118,58 +167,20 @@ while(Gagner != 1 or Gagner != 2):
 	print("")
 	dis_tab(col)
 	print("")
-	col=input("Entrez le numéro de la colonne : ")
-	if(col != 1 and col != 2 and col != 3):
-		err_col_1(col)
+	col=ask_input("colonne")
 	os.system("clear") 
 	dis_tab(col)
 	print("")
-	lin=input("Entrez le numéro de la ligne : ")
-	if(lin != 1 and lin != 2 and lin != 3):
-		err_lin_1(lin)
+	lin=ask_input("ligne")
 	display(lin, col)
 	# print("salut")
-#	time.sleep(5)
-	if(Tableau[0] == Tableau[1] == Tableau[2]):
-		if Tableau[0] != " " and Tableau[1] != " " and Tableau[2] != " ":
-			os.system("clear")
-			print("Le joueur", Tour, "a gagné")
-			break
-	if(Tableau[3] == Tableau[4] == Tableau[5]):
-		if Tableau[3] != " " and Tableau[4] != " " and Tableau[5] != " ":
-			os.system("clear")
-			print("Le joueur", Tour, "a gagné")
-			break
-	if(Tableau[6] == Tableau[7] == Tableau[8]):
-		if Tableau[6] != " " and Tableau[7] != " " and Tableau[8] != " ":
-			os.system("clear")
-			print("Le joueur", Tour, "a gagné")
-			break
-	if(Tableau[0] == Tableau[3] == Tableau[6]):
-		if Tableau[0] != " " and Tableau[3] != " " and Tableau[6] != " ":
-			os.system("clear")
-			print("Le joueur", Tour, "a gagné")
-			break
-	if(Tableau[1] == Tableau[4] == Tableau[7]):
-		if Tableau[1] != " " and Tableau[4] != " " and Tableau[7] != " ":
-			os.system("clear")
-			print("Le joueur", Tour, "a gagné")
-			break
-	if(Tableau[2] == Tableau[5] == Tableau[8]):
-		if Tableau[2] != " " and Tableau[5] != " " and Tableau[8] != " ":
-			os.system("clear")
-			print("Le joueur", Tour, "a gagné")
-			break
-	if(Tableau[0] == Tableau[4] == Tableau[8]):
-		if Tableau[0] != " " and Tableau[4] != " " and Tableau[8] != " ":
-			os.system("clear")
-			print("Le joueur", Tour, "a gagné")
-			break
-	if(Tableau[2] == Tableau[4] == Tableau[6]):
-		if Tableau[2] != " " and Tableau[4] != " " and Tableau[6] != " ":
-			os.system("clear")
-			print("Le joueur", Tour, "a gagné")
-			break
+	#	time.sleep(5)
+	if win_detect(0, 1, 2) or win_detect(3, 4, 5) or win_detect(6, 7, 8) or win_detect(0, 3, 6) or win_detect(0, 1, 2) or win_detect(1, 4, 7) or win_detect(2, 5, 8) or win_detect(0, 4, 8) or win_detect(6, 7, 8):
+		os.system("clear")
+		print("")
+		print("Le joueur", Tour, "a gagné!")
+		print("")
+		break
 	if Tableau[0] != " " and Tableau[1] != " " and Tableau[2] != " " and Tableau[3] != " " and Tableau[4] != " " and Tableau[5] != " " and Tableau[6] != " " and Tableau[7] != " " and Tableau[8] != " ":
 		os.system("clear")
 		print("Vous avez perdu !")
@@ -177,9 +188,7 @@ while(Gagner != 1 or Gagner != 2):
 		print("Fin de la partie !")
 		time.sleep(5)
 		break
-		os.system("python jeu.py")
+os.system("python jeu.py")
 # 0 1 2
 # 3 4 5
 # 6 7 8
-
-	
