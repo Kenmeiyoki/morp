@@ -1,4 +1,4 @@
-# UBUNTU version v3.0
+# UBUNTU version
 # -*- coding: UTF-8 -*-
 
 
@@ -11,6 +11,7 @@ from __future__ import print_function
 
 import os
 import time
+import random
 
 Start = 60
 Tableau = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
@@ -27,7 +28,7 @@ W_3_det = 0
 
 
 
-for i in range(60):
+for i in range(1):
 	os.system("clear")
 	print("Le jeu commence dans ", Start, " !")
 	Start = Start-1
@@ -57,6 +58,7 @@ def dis_tab(numcol):
 	print("╠═╬═╬═╣")
 	print("║", Tableau[6], "║", Tableau[7], "║", Tableau[8], "║", ArrowR[2],sep="")
 	print("╚═╩═╩═╝")
+
 def err_col_2(col):
 	os.system("clear") 
 	time.sleep(0.1)
@@ -101,21 +103,13 @@ def win_detect(W_1_det, W_2_det, W_3_det):
 	return False
 
 
+def random_pick(Tableau):
+	empty_indices = []
+	for i, value in enumerate(Tableau):
+		if value == " ":
+			empty_indices.append(i)
+	return random.choice(empty_indices)
 
-
-
-#def err_col_1(col):
-#	os.system("clear") 
-#	print("ERREUR : Colonne inconnue")
-#	time.sleep(1)
-#	os.system("clear")
-#	print("")
-#	dis_tab(col)
-#	print("")
-#	col=raw_input("Entrez le numéro de la colonne : ")
-#	verif_string_int(col)
-#	if(col != 1 and col != 2 and col != 3):
-#	err_col_1(col)
 
 def ind(row, col):
 	return (row-1)*3+col-1
@@ -137,18 +131,30 @@ def display(row, col):
 		print("Please wait...")
 		time.sleep(0.3)
 
-#def err_lin_1(lin):
-#	os.system("clear") 
-#	print("ERREUR : Ligne inconnue")
-#	time.sleep(1)
-#	os.system("clear")
-#	print("")
-#	dis_tab(lin)
-#	print("")
-#	lin=raw_input("Entrez le numéro de la ligne : ")
-#	verif_string_int(lin)
-#	if(lin != 1 and lin != 2 and lin != 3):
-#		err_lin_1(col)
+def exe_ia():
+	for i in range(3):
+		roww = i+1
+		coll = 0
+		if Tableau[ind(roww, 1)] == Tableau[ind(roww, 2)]:
+			if Tableau[ind(roww, 1)] != " " and Tableau[ind(roww, 2)] != " ":
+				choix=(ind(roww, 3))
+				return choix
+	for i in range(3):
+		roww = 1+i
+		coll = i
+		if Tableau[ind(roww, 2)] == Tableau[ind(roww, 3)]:
+			if Tableau[ind(roww, 2)] != " " and Tableau[ind(roww, 3)] != " ":
+				choix=(ind(roww, 1))
+				return choix
+	for i in range(3):
+		roww = 1+i
+		coll = i
+		if Tableau[ind(roww, 1)] == Tableau[ind(roww, 3)]:
+			if Tableau[ind(roww, 1)] != " " and Tableau[ind(roww, 3)] != " ":
+				choix=(ind(roww, 2))
+				return choix
+	return random_pick(Tableau)
+
 time.sleep(1)
 os.system("clear") 
 time.sleep(0.1)
@@ -167,12 +173,41 @@ while(Gagner != 1 or Gagner != 2):
 	print("")
 	dis_tab(col)
 	print("")
-	col=ask_input("colonne")
-	os.system("clear") 
-	dis_tab(col)
-	print("")
-	lin=ask_input("ligne")
-	display(lin, col)
+	if Tour == 1 :
+		col=ask_input("colonne")
+		time.sleep(0.1)
+		os.system("clear") 
+		dis_tab(col)
+		print("")
+		lin=ask_input("ligne")
+		vfkvnfklv=ind(lin, col)
+		Tableau[vfkvnfklv] = Signe
+	if Tour == 2 :
+		os.system("clear")
+		print("")
+		dis_tab(col)
+		print("")
+		print("L'ordinateur est entrain de jouer !")
+		calcul = 1
+
+		# ESSAYE DE PERDRE PAR LIGNE
+
+		
+
+
+		choix = exe_ia()
+		Tableau[choix] = Signe
+# 1 2 3
+# 4 5 6
+# 7 8 9
+
+
+
+
+
+
+		time.sleep(3)
+	#display(lin, col)
 	# print("salut")
 	#	time.sleep(5)
 	if win_detect(0, 1, 2) or win_detect(3, 4, 5) or win_detect(6, 7, 8) or win_detect(0, 3, 6) or win_detect(0, 1, 2) or win_detect(1, 4, 7) or win_detect(2, 5, 8) or win_detect(0, 4, 8) or win_detect(6, 7, 8):
@@ -188,7 +223,6 @@ while(Gagner != 1 or Gagner != 2):
 		print("Fin de la partie !")
 		time.sleep(5)
 		break
-os.system("python jeu.py")
 # 0 1 2
 # 3 4 5
 # 6 7 8
